@@ -1,3 +1,4 @@
+#Understands all transactions and keeps as log
 require_relative 'transaction'
 
 class AccountSummary
@@ -8,19 +9,15 @@ class AccountSummary
     @transaction_log = []
   end
 
-  def deposit(amount, balance)
-    deposit = Transaction.new(amount, balance)
+  def deposit(amount, balance, time = Time.now.strftime("%d/%m/%Y"))
+    deposit = Transaction.new(credit: amount, balance: balance, time: time)
     transaction_log << deposit
   end
 
-  def withdrawal(amount, balance)
-    withdrawal = Transaction.new(amount, balance)
+  def withdrawal(amount, balance, time = Time.now.strftime("%d/%m/%Y"))
+    withdrawal = Transaction.new(debit: amount, balance: balance, time: time)
     transaction_log << withdrawal
   end
+  #
 
-  # def print_transactions
-  #   transaction_log.each do |transaction|
-  #     transaction.map do |element|
-  #       ""
-  # end
 end
