@@ -3,7 +3,7 @@
 
  class BankController
 
- attr_reader :balance
+ attr_reader :balance, :transactions
 
    def initialize (transation_class = Transaction)
      @transation_class = transation_class

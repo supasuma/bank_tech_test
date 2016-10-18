@@ -2,8 +2,8 @@ require 'bank_controller'
 
 describe BankController do
   subject(:bank_controller) { described_class.new(transaction_class) }
-  let (:transaction_class) { double(:transaction_class) }
-  let (:transaction) { double(:transaction)}
+  let (:transaction_class) { double(:transaction_class, new: transaction) }
+  let (:transaction) { double(:transaction, amount: 100, current_balance: 100, time: @time_now )}
 
 context '#add_deposit' do
   before do
@@ -15,7 +15,13 @@ context '#add_deposit' do
   end
 
   it 'should create a new transaction' do
-    expect(bank_controller.instance_variable_get(:@current_transaction))
+    @time_now = Time.now
+    allow(Time).to receive(:now).and_return(@time_now)
+    expect(bank_controller.instance_variable_get(:@current_transaction)).to eq(transaction)
+  end
+
+  it 'should add transaction to transactions array' do
+    expect(bank_controller.transactions).to eq([transaction])
   end
 end
 
