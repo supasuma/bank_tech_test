@@ -3,26 +3,33 @@
 
  class BankController
 
- attr_reader :balance, :transactions
+ attr_reader :balance
+ # :transactions
 
-   def initialize (transation_class = Transaction)
-     @transation_class = transation_class
+# (transation_class = Transaction)
+   def initialize
+     @account_summary = account_summary || AccountSummary.new
      @current_transaction = nil
-     @transactions = []
+    #  @transactions = []
      @balance = 0
    end
 
    def add_deposit(amount)
      @balance += amount
-     build_transaction(amount)
+     @account_summary.deposit(amount, @balance)
    end
+
+  def deduct_withdrawl(amount)
+    # fail "You don't have sufficient funds.  Current balance is #{@balance}" if sufficient_funds?(amount)
+    @balance -= amount
+    @account_summary.withdrawal(amount, @balance)
+  end
+
+
 
    private
 
-   def build_transaction(amount)
-     @current_transaction = @transation_class.new(amount, @balance)
-     @transactions << @current_transaction
-   end
+
 
 
  end
