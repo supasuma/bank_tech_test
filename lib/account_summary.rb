@@ -6,7 +6,7 @@ require_relative 'transaction'
 class AccountSummary
 
   attr_reader :transaction_log
-  #need to get rid of public readers...
+  #need to get rid of public readers...how???
 
   def initialize
     @transaction_log = []

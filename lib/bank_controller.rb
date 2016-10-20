@@ -17,7 +17,6 @@
    def add_deposit(time = Time.now, amount)
      @balance += amount
      account_summary.deposit(time, amount, balance)
-    #  does the above line need to be tested? if so how?
    end
 
   def deduct_withdrawal(time = Time.now, amount)
