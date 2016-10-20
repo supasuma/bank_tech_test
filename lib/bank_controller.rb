@@ -4,30 +4,31 @@
  class BankController
 
  attr_reader :balance, :account_summary
+ # I don't understand how to get rid of public readers, particularly for testing whether balance has been altered?
 
  OPENING_BALANCE = 0
 
    def initialize
      @account_summary = account_summary || AccountSummary.new
+    #  Is the above reducing dependency purely by allowing another object that responds to bank_controllers methods to be passed in?
      @balance = OPENING_BALANCE
    end
 
-   def add_deposit(amount)
+   def add_deposit(time = Time.now, amount)
      @balance += amount
-     account_summary.deposit(amount, balance)
+     account_summary.deposit(time, amount, balance)
+    #  does the above line need to be tested? if so how?
    end
 
-  def deduct_withdrawal(amount)
+  def deduct_withdrawal(time = Time.now, amount)
     fail "You don't have sufficient funds" if sufficient_funds?(amount)
     @balance -= amount
-    account_summary.withdrawal(amount, balance)
+    account_summary.withdrawal(time, amount, balance)
   end
 
-  # def print_transactions
-  #   account_summary.transaction_log.each do |transaction|
-  #     transaction.map do |element|
-  #       "date = element.time"
-  # end
+  def print_statement
+    account_summary.print_statement
+  end
 
    private
 
