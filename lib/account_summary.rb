@@ -19,7 +19,7 @@ class AccountSummary
   end
 
   def withdrawal(time, amount, balance)
-    withdrawal = Transaction.new(debit: amount, balance: balance, time: time)
+    withdrawal = Transaction.new(time: time, debit: amount, balance: balance)
     transaction_log << withdrawal
   end
 

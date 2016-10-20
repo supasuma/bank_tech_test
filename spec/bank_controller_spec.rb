@@ -20,7 +20,7 @@ context '#add_deposit' do
 
   it 'should create a new account summary' do
     bank_controller.add_deposit(100)
-    expect(account_summary).to have_received(:deposit).with(100, 100, @time_now)
+    expect(account_summary).to have_received(:deposit).with(@time_now, 100, 100)
   end
 end
 
@@ -36,7 +36,7 @@ context '#deduct_withdrawal' do
 
   it 'should create a new account summary' do
     bank_controller.deduct_withdrawal(100)
-    expect(account_summary).to have_received(:withdrawal).with(100, 0, @time_now)
+    expect(account_summary).to have_received(:withdrawal).with(@time_now, 100, 0)
   end
 
 end
