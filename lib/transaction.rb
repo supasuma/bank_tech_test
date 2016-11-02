@@ -11,3 +11,4 @@ attr_reader :time, :credit, :debit, :balance
   end
 
 end
+# this class only has state, no behaviour. You could consider a #to_s method that returns the data as a string - that way you could get rid of the attr_readers.

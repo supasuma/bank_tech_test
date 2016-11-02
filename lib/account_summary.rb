@@ -5,6 +5,9 @@ require_relative 'transaction'
 
 class AccountSummary
 
+  # you don't use this anywhere in the code - just make it private and you're done :)
+  # Test it by testing the print statement
+
   attr_reader :transaction_log
   #need to get rid of public readers...how???
 
